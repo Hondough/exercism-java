@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="HammingTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2017-02-02T22:14:33" hostname="WHDQ2099" time="0.01">
+  <properties/>
+  <testcase name="testValidatesOtherStrandNotLonger" classname="HammingTest" time="0.002"/>
+  <testcase name="testSmallHammingDistanceInLongerStrand" classname="HammingTest" time="0.008"/>
+  <testcase name="testLargeHammingDistance" classname="HammingTest" time="0.0"/>
+  <testcase name="testNoDifferenceBetweenIdenticalStrands" classname="HammingTest" time="0.0"/>
+  <testcase name="testHammingDistanceInVeryLongStrand" classname="HammingTest" time="0.0"/>
+  <testcase name="testCompleteHammingDistanceForSmallStrand" classname="HammingTest" time="0.0"/>
+  <testcase name="testValidatesFirstStrandNotLonger" classname="HammingTest" time="0.0"/>
+  <testcase name="testSmallHammingDistance" classname="HammingTest" time="0.0"/>
+  <testcase name="testCompleteHammingDistanceOfForSingleNucleotideStrand" classname="HammingTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
