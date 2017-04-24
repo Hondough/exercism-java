@@ -50,7 +50,6 @@ public class LuhnValidatorTest {
         assertFalse(luhnValidator.isValid("8273 1232 7352 0569"));
     }
 
-    @Ignore
     @Test
     public void testThatAddingANonDigitCharacterToAValidStringInvalidatesTheString() {
         assertFalse(luhnValidator.isValid("046a 454 286"));
