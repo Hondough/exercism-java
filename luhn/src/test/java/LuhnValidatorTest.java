@@ -18,25 +18,21 @@ public class LuhnValidatorTest {
         assertFalse(luhnValidator.isValid("1"));
     }
 
-    @Ignore
     @Test
     public void testThatTheStringConsistingOfASingleZeroIsInvalid() {
         assertFalse(luhnValidator.isValid("0"));
     }
 
-    @Ignore
     @Test
     public void testThatASimpleValidNumberIsIdentifiedAsValid() {
         assertTrue(luhnValidator.isValid(" 5 9 "));
     }
 
-    @Ignore
     @Test
     public void testThatAValidCanadianSocialInsuranceNumberIsIdentifiedAsValidV1() {
         assertTrue(luhnValidator.isValid("046 454 286"));
     }
 
-    @Ignore
     @Test
     public void testThatAValidCanadianSocialInsuranceNumberIsIdentifiedAsValidV2() {
         assertTrue(luhnValidator.isValid("055 444 285"));
