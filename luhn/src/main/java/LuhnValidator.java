@@ -28,9 +28,9 @@ public class LuhnValidator {
      * Sum of the digits (after doubling every second digit and reducing it by 9 if greater than 9
      * going right to left) should be cleanly divisible by 10.
      * 
-     * @param   input - the reversed number after cleaning out whitespaces. Only digits are permitted.
+     * @param   input - the number to be validated. Only digits will work properly.
      * 
-     * @return  true if the input is a valid number based on the Luhn algorithm.
+     * @return  true if the input is a valid number based on the Luhn algorithm otherwise false.
      */
     private boolean isLuhnCalculationValid(StringBuffer input) {
         return luhnSum(input) % 10 == 0;
@@ -40,8 +40,7 @@ public class LuhnValidator {
      * 
      * The first step of the Luhn algorithm is to double every second digit
      * starting from the last digit. The input is reversed to go through it
-     * forwards. The alternative is to use a spiterator to go through the number.
-     * from right to left. These values are then summed.
+     * forwards. These values are then summed.
      * <p>
      * The field "shouldDouble" is a flag used when calculating the transform value.
      * It is set to false for the first number as that should just return itself.
@@ -52,8 +51,10 @@ public class LuhnValidator {
      */
     private long luhnSum(StringBuffer input) {
         shouldDouble = false;
-        return input.reverse().toString().codePoints().map(c -> Integer.valueOf(String.valueOf((char) c)))
-                .map(i -> luhnValue(i)).sum();
+        return input.reverse().toString().codePoints()
+            .map(c -> Integer.valueOf(String.valueOf((char) c)))
+            .map(i -> luhnValue(i))
+            .sum();
     }
 
     /**
@@ -61,7 +62,7 @@ public class LuhnValidator {
      * or it will double the value and then subtract 9 if it is greater than 9.
      * <p>
      * Side effect is to negate the field shouldDouble so it does the other side
-     * of the transaction for the next number.
+     * function for the next number.
      * 
      * @param   int - original value to be transformed
      * 
