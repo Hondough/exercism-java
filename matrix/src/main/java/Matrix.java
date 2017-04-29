@@ -2,13 +2,9 @@ import java.util.stream.Stream;
 
 public class Matrix {
 
-    private String matrix;
     private String[] rows;
-    private int rowsCount;
-    private int columnsCount;
 
     public Matrix(String matrix) {
-        this.matrix = matrix;
         rows = Stream.of(matrix.split("\n"))
             .toArray(size -> new String[size]);
     }
@@ -28,6 +24,6 @@ public class Matrix {
     }
 
     public int getColumnsCount() {
-        return columnsCount;
+        return getRow(0).length;
     }
 }
