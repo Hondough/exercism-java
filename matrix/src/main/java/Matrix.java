@@ -1,25 +1,33 @@
+import java.util.stream.Stream;
+
 public class Matrix {
 
-    private int[][] matrix;
+    private String matrix;
+    private String[] rows;
+    private int rowsCount;
+    private int columnsCount;
 
-    public Matrix(String matrixIn) {
-        matrix = new int[1][1];
+    public Matrix(String matrix) {
+        this.matrix = matrix;
+        rows = Stream.of(matrix.split("\n"))
+            .toArray(size -> new String[size]);
     }
 
     public int[] getRow(int row) {
-        return matrix[0];
+        return Stream.of(rows[row].split(" "))
+            .mapToInt(d -> Integer.valueOf(d))
+            .toArray();
     }
 
     public int getRowsCount() {
-        return matrix[0].length;
+        return rows.length;
     }
 
     public int[] getColumn(int col) {
-        return matrix[0];
+        return new int[1];
     }
 
     public int getColumnsCount() {
-        return matrix[0].length;
+        return columnsCount;
     }
-
 }
