@@ -1,3 +1,4 @@
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Matrix {
@@ -20,7 +21,9 @@ public class Matrix {
     }
 
     public int[] getColumn(int col) {
-        return new int[1];
+        return IntStream.range(0, rows.length)
+            .map(row -> getRow(row)[col])
+            .toArray();
     }
 
     public int getColumnsCount() {
