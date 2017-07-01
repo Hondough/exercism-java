@@ -1,64 +1,47 @@
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Spliterator;
+import java.util.stream.LongStream;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class LargestSeriesProductCalculator {
 
-    private class SeriesOfDigits implements Iterable {
-
-        int[] digits;
-        int seriesLength;
-
-        public void setSeriesLength(int seriesLength) {
-            this.seriesLength = seriesLength;
-        }
-
-        public SeriesOfDigits(String stringOfDigits) {
-            digits = Stream.of(stringOfDigits.split(".")).mapToInt(d -> Integer.valueOf(d)).toArray();
-        }
-
-        public Iterator<int[]> iterator() {
-            return iterator(seriesLength);
-        }
-
-        public Iterator<int[]> iterator(int seriesLength) {
-            return (Iterator<int[]>) new SeriesOfDigitsIterator(seriesLength);
-        }
-
-        private class SeriesOfDigitsIterator implements Iterator {
-            int currentIndex = 0;
-            int seriesLength;
-
-            public SeriesOfDigitsIterator(int seriesLength) {
-                this.seriesLength = seriesLength;
-            }
-
-            @Override
-            public boolean hasNext() {
-                return currentIndex < digits.length - seriesLength;
-            }
-
-            @Override
-            public int[] next() {
-                int start = currentIndex;
-                int end = start + seriesLength;
-                currentIndex++;
-                return IntStream.range(start, end).map(index -> digits[index]).toArray();
-            }
-
-            @Override
-            public void remove() {
-                throw new UnsupportedOperationException("Remove() not implemented");
-            }
-        }
-    }
+    private int[] digits;
 
     public LargestSeriesProductCalculator(String stringOfDigits) {
-        SeriesOfDigits digits = new SeriesOfDigits(stringOfDigits);
+
+        validateStringOfDigits(stringOfDigits);
+        digits = stringOfDigits.chars().map(Character::getNumericValue).toArray();
     }
 
     public long calculateLargestProductForSeriesLength(int seriesLength) {
-        return 72L;
+
+        validateSeriesLength(seriesLength);
+        return IntStream.rangeClosed(0, digits.length - seriesLength)
+                .mapToLong(start -> IntStream.range(start, start + seriesLength).mapToLong(index -> digits[index])
+                        .reduce(1L, (left, right) -> left * right))
+                .max().orElse(0);
+    }
+
+    private void validateStringOfDigits(String stringOfDigits) {
+        if (stringOfDigits == null) {
+            throw new IllegalArgumentException("String to search must be non-null.");
+        }
+        if (!stringOfDigits.chars().allMatch(Character::isDigit)) {
+            throw new IllegalArgumentException("String to search may only contains digits.");
+        }
+    }
+
+    private void validateSeriesLength(int seriesLength) {
+        if (seriesLength < 0) {
+            throw new IllegalArgumentException("Series length must be non-negative.");
+        }
+        if (seriesLength > digits.length) {
+            throw new IllegalArgumentException(
+                    "Series length must be less than or equal to the length of the string to search.");
+        }
     }
 
 }
